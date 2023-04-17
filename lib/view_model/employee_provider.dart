@@ -1,4 +1,4 @@
-import 'package:employee_management/model/employee_modal.dart';
+import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:flutter/cupertino.dart';
 
 class EmployeeProvider extends ChangeNotifier{

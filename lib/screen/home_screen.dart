@@ -1,12 +1,34 @@
 import 'package:employee_management/app_util.dart';
+import 'package:employee_management/data/model/employee_modal.dart';
+import 'package:employee_management/data/repository/employee_repository.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    //EmployeeRepository().insertEmployee(EmployeeModal(name: "Mofidul",role: "mndmv",dateFrom: 1681748997938,dateTo: 1681748997938));
+   getData();
+
+  }
+  void getData()async{
+    List<Map<String, dynamic>>? data =await EmployeeRepository().getEmployees();
+    EmployeeModal employeeModal=EmployeeModal.fromJson(data?.first);
+    employeeModal.name="Updatedname";
+    await EmployeeRepository().updateEmployeeRecord(employeeModal);
+
+    print(data);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

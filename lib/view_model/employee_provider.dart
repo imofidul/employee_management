@@ -2,24 +2,24 @@ import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:flutter/cupertino.dart';
 
 class EmployeeProvider extends ChangeNotifier{
-  List<Employee> _employeeList = [];
-  List<Employee> get employeeList => _employeeList;
-  set employeeList(List<Employee> value) {
+  List<EmployeeModal> _employeeList = [];
+  List<EmployeeModal> get employeeList => _employeeList;
+  set employeeList(List<EmployeeModal> value) {
     _employeeList = value;
     notifyListeners();
   }
 
-  void addEmployee(Employee employee){
+  void addEmployee(EmployeeModal employee){
     _employeeList.add(employee);
     notifyListeners();
   }
 
-  void removeEmployee(Employee employee){
+  void removeEmployee(EmployeeModal employee){
     _employeeList.remove(employee);
     notifyListeners();
   }
 
-  void updateEmployee(Employee employee){
+  void updateEmployee(EmployeeModal employee){
 
     notifyListeners();
   }

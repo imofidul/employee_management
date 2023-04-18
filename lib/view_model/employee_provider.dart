@@ -43,10 +43,23 @@ class EmployeeProvider extends ChangeNotifier{
       {
         for (var element in data) {
           EmployeeModal employeeModal=EmployeeModal.fromJson(element);
-          if(employeeModal.dateTo==0) {
+
+          bool isCurrentEmployee=employeeModal.dateTo==0;
+          if(employeeModal.dateTo!=0) {
+            DateTime employeeToDate= DateTime.fromMillisecondsSinceEpoch(employeeModal.dateTo??0);
+            DateTime currentDateTime=DateTime.now();
+            Duration duration =employeeToDate.difference(currentDateTime);
+            if(duration.isNegative) {
+              isCurrentEmployee=false;
+            }
+            else{
+              isCurrentEmployee=true;
+            }
+          }
+          if(isCurrentEmployee) {
             employeeListCurrent.add(employeeModal);
           }
-          if(employeeModal.dateTo!=0) {
+          if(!isCurrentEmployee) {
             employeeListPrevious.add(employeeModal);
           }
         }

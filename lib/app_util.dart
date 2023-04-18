@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:intl/intl.dart';
+
 class AppColor{
   static Color primaryColor=const Color(0xff1DA1F2);
   static Color colorOnPrimary=const Color(0xffffffff);
@@ -11,3 +13,14 @@ class AppDimension{
   static double fabBorderRadius=8;
 
 }
+
+
+class AppDateUtil{
+  static String formatDate(DateTime dateTime)
+  {
+    DateFormat dateFormat=DateFormat("dd MMM yyyy");
+    return dateFormat.format(dateTime);
+  }
+}
+
+

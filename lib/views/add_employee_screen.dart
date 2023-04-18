@@ -12,6 +12,22 @@ class AddEmployeeScreen extends StatefulWidget {
 
 class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   final _formKey = GlobalKey<FormState>();
+  String toDate="";
+  String fromDate="";
+  Future<DateTime?> getDateTime()async{
+    DateTime now = DateTime.now();
+    DateTime firstDate =
+    now.subtract(const Duration(days: 3650));
+    DateTime lastDate =
+    now.add(const Duration(days: 3650));
+    DateTime? dateTime=await  showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+    return dateTime;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,12 +69,15 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 12.69, bottom: 12.69, left: 12.69,right: 14.5),
+                            top: 12.69,
+                            bottom: 12.69,
+                            left: 12.69,
+                            right: 14.5),
                         child: Image.asset("./assets/png/role.png"),
                       ),
                       const Expanded(
                         child: Text(
-                         "Select Role",
+                          "Select Role",
                         ),
                       ),
                       Padding(
@@ -75,19 +94,32 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                 Row(
                   children: [
                     Expanded(
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColor.textFieldBorderColor),
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 11.5,right: 13.18),
-                              child: SvgPicture.asset("./assets/svg/calender_icon.svg"),
-                            ),
-                            const Text("Today"),
-                          ],
+                      child: GestureDetector(
+                        onTap: ()async{
+                          DateTime? dateTime=await getDateTime();
+                          if(dateTime!=null) {
+                            fromDate=AppDateUtil.formatDate(dateTime);
+                            setState(() {
+                            });
+                          }
+                        },
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColor.textFieldBorderColor),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 11.5, right: 13.18),
+                                child: SvgPicture.asset(
+                                    "./assets/svg/calender_icon.svg"),
+                              ),
+                               Text(fromDate.isEmpty?"Today":fromDate),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -96,25 +128,38 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                       child: SvgPicture.asset("./assets/svg/arrow_forward.svg"),
                     ),
                     Expanded(
-                      child: Container(
-                        height: 40,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: AppColor.textFieldBorderColor),
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 11.5,right: 13.18),
-                              child: SvgPicture.asset("./assets/svg/calender_icon.svg"),
-                            ),
-                            const Text("No date"),
-                          ],
+                      child: GestureDetector(
+                        onTap: ()async{
+                          DateTime? dateTime=await getDateTime();
+                          if(dateTime!=null) {
+                            toDate=AppDateUtil.formatDate(dateTime);
+                            setState(() {
+
+                            });
+                          }
+                        },
+                        child: Container(
+                          height: 40,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColor.textFieldBorderColor),
+                          ),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 11.5, right: 13.18),
+                                child: SvgPicture.asset(
+                                    "./assets/svg/calender_icon.svg"),
+                              ),
+                              Text(toDate.isEmpty?"No date":toDate),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ],
                 ),
-
               ],
             ),
           ),
@@ -123,9 +168,20 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       floatingActionButton: Row(
         children: [
           const Spacer(),
-          ElevatedButton(onPressed: (){},style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF),), child:  Text("Cancel",style: GoogleFonts.roboto(color: AppColor.primaryColor),),),
-          const SizedBox(width: 16,),
-          ElevatedButton(onPressed: (){}, child: const Text("Save"))
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xffEDF8FF),
+            ),
+            child: Text(
+              "Cancel",
+              style: GoogleFonts.roboto(color: AppColor.primaryColor),
+            ),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          ElevatedButton(onPressed: () {}, child: const Text("Save"))
         ],
       ),
     );

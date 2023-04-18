@@ -5,6 +5,7 @@ import 'package:employee_management/views/add_employee_screen.dart';
 import 'package:employee_management/widgets/item_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -28,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Consumer<EmployeeProvider>(
         builder: (_, employeeProvider, child) {
-          if (employeeProvider.employeeListCurrent.isEmpty&&employeeProvider.employeeListPrevious.isEmpty) {
+          if (employeeProvider.employeeListCurrent.isEmpty &&
+              employeeProvider.employeeListPrevious.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -63,20 +65,28 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView.builder(
                   itemCount: employeeProvider.employeeListCurrent.length,
                   itemBuilder: (_, index) {
-                    EmployeeModal employee=employeeProvider.employeeListCurrent[index];
-                   return Dismissible(
-                    key: ObjectKey(employee),
-                      background: Container(color: Colors.red),
-                      onDismissed: (DismissDirection direction){
-                      if(direction==DismissDirection.startToEnd) {
-                        employeeProvider.employeeListCurrent.remove(employee);
-                        employeeProvider.removeEmployee(employee);
-                      }
-                    },
-                    child: EmployeeItem(
-                      employeeModal: employee,
-                    ),
-                  );},
+                    EmployeeModal employee =
+                        employeeProvider.employeeListCurrent[index];
+                    return Dismissible(
+                      key: ObjectKey(employee),
+                      background: Container(
+                        color: Colors.red,
+                        child: const Icon(
+                          Icons.delete,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onDismissed: (DismissDirection direction) {
+                        if (direction == DismissDirection.startToEnd) {
+                          employeeProvider.employeeListCurrent.remove(employee);
+                          employeeProvider.removeEmployee(employee);
+                        }
+                      },
+                      child: EmployeeItem(
+                        employeeModal: employee,
+                      ),
+                    );
+                  },
                 ),
               )),
               Row(
@@ -93,14 +103,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               Expanded(
-                  child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ListView.builder(
-                          itemCount:
-                              employeeProvider.employeeListPrevious.length,
-                          itemBuilder: (_, index) => EmployeeItem(
-                              employeeModal: employeeProvider
-                                  .employeeListPrevious[index]))))
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView.builder(
+                      itemCount: employeeProvider.employeeListPrevious.length,
+                      itemBuilder: (_, index) {
+                        EmployeeModal employee =
+                        employeeProvider.employeeListPrevious[index];
+                        return Dismissible(
+                          key: ObjectKey(employee),
+                          background: Container(
+                            color: Colors.red,
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.white,
+                            ),
+                          ),
+                          onDismissed: (DismissDirection direction) {
+                            if (direction == DismissDirection.startToEnd) {
+                              employeeProvider.employeeListPrevious.remove(employee);
+                              employeeProvider.removeEmployee(employee);
+                            }
+                          },
+                          child: EmployeeItem(
+                            employeeModal: employee,
+                          ),
+                        );
+                      }),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 12, bottom: 12),
+                child: Text(
+                  "Swipe left to delete",
+                  style: GoogleFonts.roboto(
+                      fontSize: 14, color: const Color(0xff949C9E)),
+                ),
+              ),
             ],
           );
         },

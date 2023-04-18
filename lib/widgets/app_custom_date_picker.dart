@@ -4,6 +4,7 @@ import 'dart:math' as math;
 
 import 'package:employee_management/app_util.dart';
 import 'package:employee_management/widgets/app_custom_calender_date_picker.dart';
+import 'package:employee_management/widgets/extenstions.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -493,6 +494,60 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     //header,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                onPressed: (){
+                              Navigator.pop(context,null);
+                            }, child:  Text("No Date",style: GoogleFonts.roboto(color: AppColor.colorOnPrimary),)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
+                                onPressed: (){
+                                  DateTime today = DateTime.now();
+                                  DateTime nextMonday=today.next(DateTime.monday);
+                                  Navigator.pop(context,nextMonday);
+
+                                }, child:  Text("Next Monday",style: GoogleFonts.roboto(color: AppColor.primaryColor),)),
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                               style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
+                                onPressed: (){
+                                 DateTime dateTime=DateTime.now();
+                                 DateTime nextWeekDate=dateTime.add(const Duration(days: 7));
+                                  Navigator.pop(context,nextWeekDate);
+                                }, child:  Text("Next Week",style: GoogleFonts.roboto(color: AppColor.primaryColor),)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
+                                onPressed: (){
+                                  DateTime today = DateTime.now();
+                                  DateTime nextTuesDay=today.next(DateTime.tuesday);
+                                  Navigator.pop(context,nextTuesDay);
+                                }, child:  Text("Next Tuesday",style: GoogleFonts.roboto(color: AppColor.primaryColor),)),
+                          ),
+                        )
+                      ],
+                    ),
                     Expanded(child: picker),
                     actions,
                   ],
@@ -503,6 +558,29 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     //header,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                onPressed: (){
+                                  Navigator.pop(context,null);
+                                }, child:  Text("No Date",style: GoogleFonts.roboto(color: AppColor.colorOnPrimary),)),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
+                                onPressed: (){
+                                  Navigator.pop(context,null);
+                                }, child:  Text("Next Monday",style: GoogleFonts.roboto(color: AppColor.primaryColor),)),
+                          ),
+                        )
+                      ],
+                    ),
                     Flexible(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,

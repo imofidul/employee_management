@@ -3,6 +3,7 @@
 import 'dart:math' as math;
 
 import 'package:employee_management/app_util.dart';
+import 'package:employee_management/widgets/app_custom_calender_date_picker.dart';
 import 'package:flutter/gestures.dart' show DragStartBehavior;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -375,8 +376,8 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
       ),
     );
 
-    CalendarDatePicker calendarDatePicker() {
-      return CalendarDatePicker(
+    CalendarDatePickerCustom calendarDatePicker() {
+      return CalendarDatePickerCustom(
         key: _calendarPickerKey,
         initialDate: _selectedDate.value,
         firstDate: widget.firstDate,
@@ -489,7 +490,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    header,
+                    //header,
                     Expanded(child: picker),
                     actions,
                   ],
@@ -499,7 +500,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    header,
+                    //header,
                     Flexible(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -727,100 +728,7 @@ class _DatePickerHeader extends StatelessWidget {
   }
 }
 
-/// Shows a full screen modal dialog containing a Material Design date range
-/// picker.
-///
-/// The returned [Future] resolves to the [DateTimeRange] selected by the user
-/// when the user saves their selection. If the user cancels the dialog, null is
-/// returned.
-///
-/// If [initialDateRange] is non-null, then it will be used as the initially
-/// selected date range. If it is provided, `initialDateRange.start` must be
-/// before or on `initialDateRange.end`.
-///
-/// The [firstDate] is the earliest allowable date. The [lastDate] is the latest
-/// allowable date. Both must be non-null.
-///
-/// If an initial date range is provided, `initialDateRange.start`
-/// and `initialDateRange.end` must both fall between or on [firstDate] and
-/// [lastDate]. For all of these [DateTime] values, only their dates are
-/// considered. Their time fields are ignored.
-///
-/// The [currentDate] represents the current day (i.e. today). This
-/// date will be highlighted in the day grid. If null, the date of
-/// `DateTime.now()` will be used.
-///
-/// An optional [initialEntryMode] argument can be used to display the date
-/// picker in the [DatePickerEntryMode.calendar] (a scrollable calendar month
-/// grid) or [DatePickerEntryMode.input] (two text input fields) mode.
-/// It defaults to [DatePickerEntryMode.calendar] and must be non-null.
-///
-/// The following optional string parameters allow you to override the default
-/// text used for various parts of the dialog:
-///
-///   * [helpText], the label displayed at the top of the dialog.
-///   * [cancelText], the label on the cancel button for the text input mode.
-///   * [confirmText],the label on the ok button for the text input mode.
-///   * [saveText], the label on the save button for the fullscreen calendar
-///     mode.
-///   * [errorFormatText], the message used when an input text isn't in a proper
-///     date format.
-///   * [errorInvalidText], the message used when an input text isn't a
-///     selectable date.
-///   * [errorInvalidRangeText], the message used when the date range is
-///     invalid (e.g. start date is after end date).
-///   * [fieldStartHintText], the text used to prompt the user when no text has
-///     been entered in the start field.
-///   * [fieldEndHintText], the text used to prompt the user when no text has
-///     been entered in the end field.
-///   * [fieldStartLabelText], the label for the start date text input field.
-///   * [fieldEndLabelText], the label for the end date text input field.
-///
-/// An optional [locale] argument can be used to set the locale for the date
-/// picker. It defaults to the ambient locale provided by [Localizations].
-///
-/// An optional [textDirection] argument can be used to set the text direction
-/// ([TextDirection.ltr] or [TextDirection.rtl]) for the date picker. It
-/// defaults to the ambient text direction provided by [Directionality]. If both
-/// [locale] and [textDirection] are non-null, [textDirection] overrides the
-/// direction chosen for the [locale].
-///
-/// The [context], [useRootNavigator] and [routeSettings] arguments are passed
-/// to [showDialog], the documentation for which discusses how it is used.
-/// [context] and [useRootNavigator] must be non-null.
-///
-/// The [builder] parameter can be used to wrap the dialog widget
-/// to add inherited widgets like [Theme].
-///
-/// {@macro flutter.widgets.RawDialogRoute}
-///
-/// ### State Restoration
-///
-/// Using this method will not enable state restoration for the date range picker.
-/// In order to enable state restoration for a date range picker, use
-/// [Navigator.restorablePush] or [Navigator.restorablePushNamed] with
-/// [DateRangePickerDialog].
-///
-/// For more information about state restoration, see [RestorationManager].
-///
-/// {@macro flutter.widgets.RestorationManager}
-///
-/// {@tool sample}
-/// This sample demonstrates how to create a restorable Material date range picker.
-/// This is accomplished by enabling state restoration by specifying
-/// [MaterialApp.restorationScopeId] and using [Navigator.restorablePush] to
-/// push [DateRangePickerDialog] when the button is tapped.
-///
-/// ** See code in examples/api/lib/material/date_picker/show_date_range_picker.0.dart **
-/// {@end-tool}
-///
-/// See also:
-///
-///  * [showDatePickerCustom], which shows a Material Design date picker used to
-///    select a single date.
-///  * [DateTimeRange], which is used to describe a date range.
-///  * [DisplayFeatureSubScreen], which documents the specifics of how
-///    [DisplayFeature]s can split the screen into sub-screens.
+
 Future<DateTimeRange?> showDateRangePicker({
   required BuildContext context,
   DateTimeRange? initialDateRange,

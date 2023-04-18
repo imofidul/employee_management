@@ -358,7 +358,9 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
 
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
-            onPressed: _handleCancel,
+            onPressed: (){
+              Navigator.pop(context, DateTime.now());
+            },
             child:  Text("Today",style: GoogleFonts.roboto(color: AppColor.primaryColor),),
           ),
           const Spacer(),

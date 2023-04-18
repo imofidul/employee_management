@@ -10,7 +10,7 @@ class EmployeeProvider extends ChangeNotifier{
     getEmployees();
   }
 
-  void addEmployee(EmployeeModal employee)async{
+  Future addEmployee(EmployeeModal employee)async{
    await _employeeRepository.insertEmployee(employee);
    getEmployees();
     notifyListeners();

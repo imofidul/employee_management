@@ -49,6 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if(employeeProvider.employeeListCurrent.isNotEmpty)
                 Row(
                   children: [
                     Expanded(
@@ -63,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                if(employeeProvider.employeeListCurrent.isNotEmpty)
                 Expanded(
                     child: Container(
                   color: const Color(0xfff5f5f5),
@@ -74,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         EmployeeModal employee =
                             employeeProvider.employeeListCurrent[index];
                         return Dismissible(
+                          direction:DismissDirection.endToStart,
                           key: ObjectKey(employee),
                           background: Container(
                             color: Colors.red,
@@ -83,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           onDismissed: (DismissDirection direction) {
-                            if (direction == DismissDirection.startToEnd) {
+                            if (direction == DismissDirection.endToStart) {
                               employeeProvider.employeeListCurrent
                                   .remove(employee);
                               employeeProvider.removeEmployee(employee);
@@ -100,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                 )),
+                if(employeeProvider.employeeListPrevious.isNotEmpty)
                 Row(
                   children: [
                     Expanded(
@@ -114,6 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                if(employeeProvider.employeeListPrevious.isNotEmpty)
                 Expanded(
                   child: Container(
                     color: const Color(0xfff5f5f5),
@@ -126,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             EmployeeModal employee =
                                 employeeProvider.employeeListPrevious[index];
                             return Dismissible(
+                              direction:DismissDirection.endToStart,
                               key: ObjectKey(employee),
                               background: Container(
                                 color: Colors.red,
@@ -135,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onDismissed: (DismissDirection direction) {
-                                if (direction == DismissDirection.startToEnd) {
+                                if (direction == DismissDirection.endToStart) {
                                   employeeProvider.employeeListPrevious
                                       .remove(employee);
                                   employeeProvider.removeEmployee(employee);

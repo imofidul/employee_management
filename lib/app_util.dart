@@ -36,7 +36,7 @@ class AppDateUtil{
 
     DateTime dateTimeTo=DateTime.fromMillisecondsSinceEpoch(dateTimeSecondsTo);
     String toFormatted= dateFormat.format(dateTimeTo);
-    return "$fromFormatted-$toFormatted";
+    return "$fromFormatted, $toFormatted";
   }
 
 }

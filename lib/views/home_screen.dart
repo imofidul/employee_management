@@ -44,72 +44,35 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.grey,
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text("Current Employee"),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ListView.builder(
-                  itemCount: employeeProvider.employeeListCurrent.length,
-                  itemBuilder: (_, index) {
-                    EmployeeModal employee =
-                        employeeProvider.employeeListCurrent[index];
-                    return Dismissible(
-                      key: ObjectKey(employee),
-                      background: Container(
-                        color: Colors.red,
-                        child: const Icon(
-                          Icons.delete,
-                          color: Colors.white,
+          return Container(
+            color: const Color(0xfff2f2f2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Current Employees",
+                          style:
+                              GoogleFonts.roboto(color: AppColor.primaryColor),
                         ),
                       ),
-                      onDismissed: (DismissDirection direction) {
-                        if (direction == DismissDirection.startToEnd) {
-                          employeeProvider.employeeListCurrent.remove(employee);
-                          employeeProvider.removeEmployee(employee);
-                        }
-                      },
-                      child: EmployeeItem(
-                        employeeModal: employee,
-                      ),
-                    );
-                  },
-                ),
-              )),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.grey,
-                      child: const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text("Previous employees"),
-                      ),
                     ),
-                  ),
-                ],
-              ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: ListView.builder(
-                      itemCount: employeeProvider.employeeListPrevious.length,
+                  ],
+                ),
+                Expanded(
+                    child: Container(
+                  color: const Color(0xfff5f5f5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: ListView.separated(
+                      itemCount: employeeProvider.employeeListCurrent.length,
                       itemBuilder: (_, index) {
                         EmployeeModal employee =
-                        employeeProvider.employeeListPrevious[index];
+                            employeeProvider.employeeListCurrent[index];
                         return Dismissible(
                           key: ObjectKey(employee),
                           background: Container(
@@ -121,7 +84,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                           onDismissed: (DismissDirection direction) {
                             if (direction == DismissDirection.startToEnd) {
-                              employeeProvider.employeeListPrevious.remove(employee);
+                              employeeProvider.employeeListCurrent
+                                  .remove(employee);
                               employeeProvider.removeEmployee(employee);
                             }
                           },
@@ -129,18 +93,75 @@ class _HomeScreenState extends State<HomeScreen> {
                             employeeModal: employee,
                           ),
                         );
-                      }),
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(height: 1);
+                      },
+                    ),
+                  ),
+                )),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "Previous employees",
+                          style:
+                              GoogleFonts.roboto(color: AppColor.primaryColor),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 12, bottom: 12),
-                child: Text(
-                  "Swipe left to delete",
-                  style: GoogleFonts.roboto(
-                      fontSize: 14, color: const Color(0xff949C9E)),
+                Expanded(
+                  child: Container(
+                    color: const Color(0xfff5f5f5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: ListView.separated(
+                          itemCount:
+                              employeeProvider.employeeListPrevious.length,
+                          itemBuilder: (_, index) {
+                            EmployeeModal employee =
+                                employeeProvider.employeeListPrevious[index];
+                            return Dismissible(
+                              key: ObjectKey(employee),
+                              background: Container(
+                                color: Colors.red,
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onDismissed: (DismissDirection direction) {
+                                if (direction == DismissDirection.startToEnd) {
+                                  employeeProvider.employeeListPrevious
+                                      .remove(employee);
+                                  employeeProvider.removeEmployee(employee);
+                                }
+                              },
+                              child: EmployeeItem(
+                                employeeModal: employee,
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const Divider(height: 1);
+                          }),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 12, left: 16),
+                  child: Text(
+                    "Swipe left to delete",
+                    style: GoogleFonts.roboto(
+                        fontSize: 14, color: const Color(0xff949C9E)),
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),

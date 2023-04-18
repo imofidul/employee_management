@@ -8,7 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class AddEmployeeScreen extends StatefulWidget {
-  const AddEmployeeScreen({Key? key}) : super(key: key);
+  final EmployeeModal? employeeModal;
+  const AddEmployeeScreen({Key? key,this.employeeModal}) : super(key: key);
 
   @override
   State<AddEmployeeScreen> createState() => _AddEmployeeScreenState();
@@ -37,6 +38,37 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       lastDate: lastDate,
     );
     return dateTime;
+  }
+  void setEmployeeDetails(){
+    ///Update and delete case
+    if(widget.employeeModal!=null)
+      {
+        _controllerName.text=widget.employeeModal?.name??"";
+
+        ///Existing From date
+        fromDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.dateFrom??0);
+        if(fromDate!=null) {
+          fromDateFormatted=AppDateUtil.formatDate(fromDate!);
+        }
+
+        ///Existing to date
+        int toDatePrevious= widget.employeeModal?.dateTo??0;
+        if(toDatePrevious!=0) {
+          toDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.dateTo??0);
+          toDateFormatted=AppDateUtil.formatDate(toDate!);
+        }
+
+        roleSelected=widget.employeeModal?.role??"";
+        setState(() {
+
+        });
+
+      }
+  }
+  @override
+  void initState() {
+    setEmployeeDetails();
+    super.initState();
   }
 
   @override

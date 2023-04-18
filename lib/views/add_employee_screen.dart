@@ -326,11 +326,22 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   }
   void saveEmployee()async{
     EmployeeModal employeeModal=EmployeeModal();
+
+    if(widget.employeeModal!=null) {
+      employeeModal=widget.employeeModal!;
+    }
+
+
     employeeModal.role=roleSelected;
     employeeModal.dateFrom=fromDate?.millisecondsSinceEpoch??DateTime.now().millisecondsSinceEpoch;
     employeeModal.dateTo=toDate?.millisecondsSinceEpoch??0;
     employeeModal.name=_controllerName.text;
-    await Provider.of<EmployeeProvider>(context, listen: false).addEmployee(employeeModal);
+    if(widget.employeeModal!=null) {
+      await Provider.of<EmployeeProvider>(context, listen: false).updateEmployee(employeeModal);
+    }
+    if(widget.employeeModal==null&&mounted) {
+      await Provider.of<EmployeeProvider>(context, listen: false).addEmployee(employeeModal);
+    }
     if(mounted) {
       Navigator.pop(context);
     }

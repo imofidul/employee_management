@@ -24,7 +24,7 @@ class EmployeeProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void updateEmployee(EmployeeModal employee)async{
+  Future updateEmployee(EmployeeModal employee)async{
     await _employeeRepository.updateEmployeeRecord(employee);
     getEmployees();
     notifyListeners();

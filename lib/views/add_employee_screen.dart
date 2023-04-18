@@ -341,11 +341,20 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                  return;
                }
                if(_controllerName.text.isEmpty) {
-                 Fluttertoast.showToast(msg: "Please select a role for this employee");
+                 Fluttertoast.showToast(msg: "Please enter name of the employee");
                  return;
                }
+               if(toDate!=null&&fromDate!=null)
+                 {
+                   Duration diff =toDate!.difference(fromDate!);
+                   if(diff.isNegative) {
+                     Fluttertoast.showToast(msg: "Employee start date can not smaller than end date");
+                     return;
+                   }
+                 }
 
-               saveEmployee();
+
+               saveOrUpdateEmployee();
 
 
           }, child: const Text("Save"))
@@ -353,7 +362,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       ),
     );
   }
-  void saveEmployee()async{
+  void saveOrUpdateEmployee()async{
     EmployeeModal employeeModal=EmployeeModal();
 
     if(widget.employeeModal!=null) {

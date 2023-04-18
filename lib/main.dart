@@ -1,5 +1,5 @@
-import 'package:employee_management/screen/home_screen.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
+import 'package:employee_management/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

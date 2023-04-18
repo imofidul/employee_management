@@ -1,31 +1,47 @@
 import 'package:employee_management/data/model/employee_modal.dart';
+import 'package:employee_management/data/repository/employee_repository.dart';
 import 'package:flutter/cupertino.dart';
 
 class EmployeeProvider extends ChangeNotifier{
-  List<EmployeeModal> _employeeList = [];
+  final EmployeeRepository _employeeRepository=EmployeeRepository();
+  final List<EmployeeModal> _employeeList = [];
   List<EmployeeModal> get employeeList => _employeeList;
-  set employeeList(List<EmployeeModal> value) {
-    _employeeList = value;
-    notifyListeners();
+  EmployeeProvider(){
+    getEmployees();
   }
 
-  void addEmployee(EmployeeModal employee){
-    _employeeList.add(employee);
+  void addEmployee(EmployeeModal employee)async{
+   await _employeeRepository.insertEmployee(employee);
+   getEmployees();
     notifyListeners();
   }
 
   void removeEmployee(EmployeeModal employee){
-    _employeeList.remove(employee);
+    _employeeRepository.deleteEmployeeRecord(employee);
+    getEmployees();
     notifyListeners();
   }
 
-  void updateEmployee(EmployeeModal employee){
-
+  void updateEmployee(EmployeeModal employee)async{
+    await _employeeRepository.updateEmployeeRecord(employee);
+    getEmployees();
     notifyListeners();
   }
 
   void clearEmployeeList(){
-    _employeeList.clear();
+    notifyListeners();
+  }
+
+  ///Get All Employees from database
+  void getEmployees() async{
+    List<Map<String, dynamic>>? data =await  _employeeRepository.getEmployees();
+    if(data!=null&&data.isNotEmpty)
+      {
+        for (var element in data) {
+          EmployeeModal employeeModal=EmployeeModal.fromJson(element);
+          employeeList.add(employeeModal);
+        }
+      }
     notifyListeners();
   }
 

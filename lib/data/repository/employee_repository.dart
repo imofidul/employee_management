@@ -7,7 +7,7 @@ class EmployeeRepository{
   Future<Database?> _getDatabaseInstance()async{
     return await AppDatabase.instance.database;
   }
-  void insertEmployee(EmployeeModal employee)async{
+  Future insertEmployee(EmployeeModal employee)async{
     Database? database=await _getDatabaseInstance();
     await database?.insert(AppDatabase.tableEmployee, employee.toJson(),conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -18,5 +18,9 @@ class EmployeeRepository{
   Future<dynamic>updateEmployeeRecord(EmployeeModal employeeModal)async{
     Database? database=await _getDatabaseInstance();
     return await database?.update(AppDatabase.tableEmployee,employeeModal.toJson(),where: "id = ?",whereArgs: [employeeModal.id]);
+  }
+  Future<dynamic>deleteEmployeeRecord(EmployeeModal employeeModal)async{
+    Database? database=await _getDatabaseInstance();
+    return await database?.delete(AppDatabase.tableEmployee,where: "id = ?",whereArgs: [employeeModal.id]);
   }
 }

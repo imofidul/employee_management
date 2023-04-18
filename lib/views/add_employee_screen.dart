@@ -76,6 +76,22 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Add Employee Details"),
+        actions: [
+          if(widget.employeeModal!=null)
+            GestureDetector(
+              onTap: ()async{
+                await Provider.of<EmployeeProvider>(context, listen: false).removeEmployee(widget.employeeModal!);
+                Fluttertoast.showToast(msg: "Employee record has been deleted");
+                if(mounted) {
+                  Navigator.pop(context);
+                }
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(21.62),
+                child: Icon(Icons.delete),
+              ),
+            ),
+        ],
       ),
       body: Form(
         key: _formKey,

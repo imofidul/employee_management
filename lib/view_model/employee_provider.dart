@@ -18,7 +18,7 @@ class EmployeeProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void removeEmployee(EmployeeModal employee){
+  Future removeEmployee(EmployeeModal employee)async {
     _employeeRepository.deleteEmployeeRecord(employee);
     getEmployees();
     notifyListeners();

@@ -1,6 +1,7 @@
 import 'package:employee_management/app_util.dart';
 import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
+import 'package:employee_management/widgets/app_custom_date_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -31,11 +32,13 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
     now.subtract(const Duration(days: 3650));
     DateTime lastDate =
     now.add(const Duration(days: 3650));
-    DateTime? dateTime=await  showDatePicker(
+    DateTime? dateTime=await  showDatePickerCustom(
       context: context,
       initialDate: DateTime.now(),
       firstDate: firstDate,
       lastDate: lastDate,
+      confirmText: "SAVE",
+      cancelText: "CANCEL"
     );
     return dateTime;
   }

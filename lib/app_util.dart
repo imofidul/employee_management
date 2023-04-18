@@ -22,6 +22,23 @@ class AppDateUtil{
     DateFormat dateFormat=DateFormat("dd MMM yyyy");
     return dateFormat.format(dateTime);
   }
+  static String formatDateMillisecond(int dateTimeSecondsFrom,int dateTimeSecondsTo)
+  {
+    if(dateTimeSecondsFrom==0) {
+      return "";
+    }
+    DateTime dateTimeFrom=DateTime.fromMillisecondsSinceEpoch(dateTimeSecondsFrom);
+    DateFormat dateFormat=DateFormat("dd MMM yyyy");
+    String fromFormatted= dateFormat.format(dateTimeFrom);
+    if(dateTimeSecondsTo==0) {
+      return fromFormatted;
+    }
+
+    DateTime dateTimeTo=DateTime.fromMillisecondsSinceEpoch(dateTimeSecondsTo);
+    String toFormatted= dateFormat.format(dateTimeTo);
+    return "$fromFormatted-$toFormatted";
+  }
+
 }
 
 

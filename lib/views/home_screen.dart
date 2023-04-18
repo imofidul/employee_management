@@ -1,6 +1,7 @@
 import 'package:employee_management/app_util.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
 import 'package:employee_management/views/add_employee_screen.dart';
+import 'package:employee_management/widgets/item_employee.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Consumer<EmployeeProvider>(
         builder: (_, employeeProvider, child) {
-          if (employeeProvider.employeeList.isEmpty) {
+          if (employeeProvider.employeeListCurrent.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -40,7 +41,48 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           }
 
-          return const Text("Employees found");
+          return  Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      color:Colors.grey,
+                      child: const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text("Current Employee"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView.builder(
+                    itemCount: employeeProvider.employeeListCurrent.length,
+                    itemBuilder: (_,index)=>EmployeeItem(employeeModal:employeeProvider.employeeListCurrent[index] )),
+              )),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      color:Colors.grey,
+                      child: const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text("Previous employees"),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Expanded(child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView.builder(
+                    itemCount:employeeProvider.employeeListPrevious.length ,
+                      itemBuilder: (_,index)=>EmployeeItem(employeeModal: employeeProvider.employeeListPrevious[index]))))
+
+            ],
+          );
         },
       ),
       floatingActionButton: GestureDetector(

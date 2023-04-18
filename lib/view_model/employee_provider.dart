@@ -4,8 +4,10 @@ import 'package:flutter/cupertino.dart';
 
 class EmployeeProvider extends ChangeNotifier{
   final EmployeeRepository _employeeRepository=EmployeeRepository();
-  final List<EmployeeModal> _employeeList = [];
-  List<EmployeeModal> get employeeList => _employeeList;
+  final List<EmployeeModal> _employeeListCurrent = [];
+  List<EmployeeModal> get employeeListCurrent => _employeeListCurrent;
+  final List<EmployeeModal> _employeeListPrevious = [];
+  List<EmployeeModal> get employeeListPrevious => _employeeListPrevious;
   EmployeeProvider(){
     getEmployees();
   }
@@ -35,11 +37,18 @@ class EmployeeProvider extends ChangeNotifier{
   ///Get All Employees from database
   void getEmployees() async{
     List<Map<String, dynamic>>? data =await  _employeeRepository.getEmployees();
+    employeeListCurrent.clear();
+    employeeListPrevious.clear();
     if(data!=null&&data.isNotEmpty)
       {
         for (var element in data) {
           EmployeeModal employeeModal=EmployeeModal.fromJson(element);
-          employeeList.add(employeeModal);
+          if(employeeModal.dateTo==0) {
+            employeeListCurrent.add(employeeModal);
+          }
+          if(employeeModal.dateTo!=0) {
+            employeeListPrevious.add(employeeModal);
+          }
         }
       }
     notifyListeners();

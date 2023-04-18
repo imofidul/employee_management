@@ -21,7 +21,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
   String roleSelected="";
   DateTime? fromDate;
   DateTime? toDate;
-  TextEditingController _controllerName=TextEditingController();
+  final TextEditingController _controllerName=TextEditingController();
   
   ///Pick a date from dialog
   Future<DateTime?> getDateTime()async{
@@ -285,7 +285,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                }
 
                saveEmployee();
-             
+
 
           }, child: const Text("Save"))
         ],

@@ -11,7 +11,7 @@ class AppColor{
   static Color employeeListBackgroundColor=const Color(0xfff5f5f5);
   static Color emptyScreenTextColor=const Color(0xff323238);
   static Color unselectedTextColor=const Color(0xff949C9E);
-  static Color formValueColor=const Color(0xff323238);
+  static Color blackValueColor=const Color(0xff323238);
 
 
 

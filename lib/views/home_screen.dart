@@ -58,8 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             "Current Employees",
-                            style: GoogleFonts.roboto(
-                                color: AppColor.primaryColor),
+                            style: subHeaderTextStyle,
                           ),
                         ),
                       ),
@@ -113,8 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
                             "Previous employees",
-                            style: GoogleFonts.roboto(
-                                color: AppColor.primaryColor),
+                            style: subHeaderTextStyle,
                           ),
                         ),
                       ),

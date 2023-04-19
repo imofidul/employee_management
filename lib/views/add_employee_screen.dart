@@ -304,7 +304,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                               Text(employmentFromDateFormatted.isEmpty?"Today":employmentFromDateFormatted,style:formValueStyleSmall),
+                               Flexible(child: Text(employmentFromDateFormatted.isEmpty?"Today":employmentFromDateFormatted,style:formValueStyleSmall)),
                             ],
                           ),
                         ),
@@ -339,7 +339,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                              Text(employmentToDateFormatted.isEmpty?AppText.noDate:employmentToDateFormatted,style: employmentToDateFormatted.isEmpty?unselectedStyleSmall:formValueStyleSmall,),
+                              Flexible(child: Text(employmentToDateFormatted.isEmpty?AppText.noDate:employmentToDateFormatted,style: employmentToDateFormatted.isEmpty?unselectedStyleSmall:formValueStyleSmall,)),
                             ],
                           ),
                         ),

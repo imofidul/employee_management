@@ -79,6 +79,8 @@ class AppText{
   static String roleFlutterDeveloper="Flutter Developer";
   static String roleQA="QA Tester";
   static String roleProductOwner="Product Owner";
+  static String updateButtonText="Update";
+  static String noDate="No date";
 
 
 }

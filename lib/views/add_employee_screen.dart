@@ -31,9 +31,9 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
   Future<DateTime?> getDateTime()async{
     DateTime now = DateTime.now();
     DateTime firstDate =
-    now.subtract(const Duration(days: 3650));
+    now.subtract(const Duration(days: 36500));
     DateTime lastDate =
-    now.add(const Duration(days: 3650));
+    now.add(const Duration(days: 36500));
 
    /// [showDatePickerCustom] is custom dialog created from framework copied and edited
     DateTime? dateTime=await showDatePickerCustom(
@@ -44,6 +44,26 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
       confirmText: "SAVE",
       cancelText: "CANCEL"
     );
+
+
+
+    if(dateTime!=null) {
+
+      DateTime dateTimeCurrent=DateTime.now();
+      Duration duration=dateTimeCurrent.difference(dateTime);
+      ///Selected no date from Dialog
+     if( (duration.inDays/365)>900){
+       employmentToDate = null;
+       employmentToDateFormatted = "";
+       setState(() {
+
+       });
+       return null;
+     }
+
+
+    }
+
     return dateTime;
   }
   ///Set existing employee details if available
@@ -319,7 +339,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                              Text(employmentToDateFormatted.isEmpty?"No date":employmentToDateFormatted,style: employmentToDateFormatted.isEmpty?unselectedStyleSmall:formValueStyleSmall,),
+                              Text(employmentToDateFormatted.isEmpty?AppText.noDate:employmentToDateFormatted,style: employmentToDateFormatted.isEmpty?unselectedStyleSmall:formValueStyleSmall,),
                             ],
                           ),
                         ),
@@ -335,7 +355,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
       floatingActionButton: Row(
         children: [
           const Spacer(),
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -373,7 +393,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                saveOrUpdateEmployee();
 
 
-          }, child:  Text(AppText.confirmButtonText))
+          }, child:  Text(widget.employeeModal==null?AppText.confirmButtonText:AppText.updateButtonText))
         ],
       ),
     );

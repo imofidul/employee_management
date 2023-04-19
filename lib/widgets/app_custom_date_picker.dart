@@ -357,7 +357,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
       child: Row(
         children: <Widget>[
 
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
             onPressed: (){
               Navigator.pop(context, DateTime.now());
@@ -365,7 +365,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
             child:  Text("Today",style: GoogleFonts.roboto(color: AppColor.primaryColor),),
           ),
           const Spacer(),
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
             onPressed: _handleCancel,
             child:  Text("Cancel",style: GoogleFonts.roboto(color: AppColor.primaryColor),),
@@ -501,14 +501,16 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                             padding: const EdgeInsets.all(8.0),
                             child: ElevatedButton(
                                 onPressed: (){
-                              Navigator.pop(context,null);
+                                  DateTime dateTime=DateTime.now();
+                                  DateTime old=dateTime.subtract(const Duration(days: 365000));
+                              Navigator.pop(context,old);
                             }, child:  Text("No Date",style: GoogleFonts.roboto(color: AppColor.colorOnPrimary),)),
                           ),
                         ),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
+                            child: TextButton(
                               style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
                                 onPressed: (){
                                   DateTime today = DateTime.now();
@@ -525,7 +527,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
+                            child: TextButton(
                                style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
                                 onPressed: (){
                                  DateTime dateTime=DateTime.now();
@@ -537,7 +539,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
+                            child: TextButton(
                                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
                                 onPressed: (){
                                   DateTime today = DateTime.now();
@@ -572,7 +574,7 @@ class _DatePickerDialogState extends State<DatePickerDialog> with RestorationMix
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: ElevatedButton(
+                            child: TextButton(
                                 style: ElevatedButton.styleFrom(backgroundColor: const Color(0xffEDF8FF)),
                                 onPressed: (){
                                   Navigator.pop(context,null);

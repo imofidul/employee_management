@@ -111,9 +111,10 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                   });
                 }
               },
-              child: const Padding(
-                padding: EdgeInsets.all(21.62),
-                child: Icon(Icons.delete),
+              child:  Padding(
+                padding: const EdgeInsets.all(21.62),
+                child:  SvgPicture.asset(
+                    "./assets/svg/delete_icon.svg"),
               ),
             ),
         ],

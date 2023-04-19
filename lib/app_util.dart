@@ -7,6 +7,10 @@ class AppColor{
   static Color colorOnPrimary=const Color(0xffffffff);
   static Color textFieldBorderColor=const Color(0xffe5e5e5);
   static Color textBottomSheetColor=const Color(0xff323238);
+  static Color backgroundColor=const Color(0xfff2f2f2);
+  static Color employeeListBackgroundColor=const Color(0xfff5f5f5);
+
+
 }
 class AppDimension{
   static double fabHeight=50;
@@ -22,7 +26,8 @@ class AppDateUtil{
     DateFormat dateFormat=DateFormat("dd MMM yyyy");
     return dateFormat.format(dateTime);
   }
-  static String formatDateMillisecond(int dateTimeSecondsFrom,int dateTimeSecondsTo)
+  ///Takes milliseconds and converts to date
+  static String formatDateFromMillisecond(int dateTimeSecondsFrom,int dateTimeSecondsTo)
   {
     if(dateTimeSecondsFrom==0) {
       return "";

@@ -7,6 +7,7 @@ class AppDatabase  {
   static AppDatabase get instance => _dbProvider;
   static Database? _databaseInstance;
 
+  ///Get Database Instance
   Future<Database?> get database async {
     if(_databaseInstance != null) {
       return _databaseInstance;
@@ -16,6 +17,7 @@ class AppDatabase  {
 
   }
 
+  ///Open Database Connection and create table named [tableEmployee]
   Future<Database> _init() async{
     return await openDatabase(
       join(await getDatabasesPath(), 'realtime.db'),

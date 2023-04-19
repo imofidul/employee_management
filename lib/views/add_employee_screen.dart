@@ -8,22 +8,23 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class AddEmployeeScreen extends StatefulWidget {
+class AddOrUpdateEmployeeScreen extends StatefulWidget {
   final EmployeeModal? employeeModal;
-  const AddEmployeeScreen({Key? key,this.employeeModal}) : super(key: key);
+  const AddOrUpdateEmployeeScreen({Key? key,this.employeeModal}) : super(key: key);
 
   @override
-  State<AddEmployeeScreen> createState() => _AddEmployeeScreenState();
+  State<AddOrUpdateEmployeeScreen> createState() => _AddOrUpdateEmployeeScreenState();
 }
 
-class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
+class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
+
   final _formKey = GlobalKey<FormState>();
-  String toDateFormatted="";
-  String fromDateFormatted="";
-  String roleSelected="";
-  DateTime? fromDate;
-  DateTime? toDate;
-  final TextEditingController _controllerName=TextEditingController();
+  String employmentToDateFormatted="";
+  String employmentFromDateFormatted="";
+  String employeeRoleSelected="";
+  DateTime? employmentFromDate;
+  DateTime? employmentToDate;
+  final TextEditingController _controllerEmployeeName=TextEditingController();
   
   ///Pick a date from dialog
   Future<DateTime?> getDateTime()async{
@@ -32,7 +33,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
     now.subtract(const Duration(days: 3650));
     DateTime lastDate =
     now.add(const Duration(days: 3650));
-    DateTime? dateTime=await  showDatePickerCustom(
+
+   /// [showDatePickerCustom] is custom dialog created from framework copied and edited
+    DateTime? dateTime=await showDatePickerCustom(
       context: context,
       initialDate: DateTime.now(),
       firstDate: firstDate,
@@ -47,20 +50,24 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
     ///Update and delete case
     if(widget.employeeModal!=null)
       {
-        _controllerName.text=widget.employeeModal?.name??"";
+        _controllerEmployeeName.text=widget.employeeModal?.name??"";
 
         ///Existing From date
-        fromDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.dateFrom??0);
-        if(fromDate!=null) {
-          fromDateFormatted=AppDateUtil.formatDate(fromDate!);
+        employmentFromDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.employmentFromDate??0);
+        if(employmentFromDate!=null) {
+          employmentFromDateFormatted=AppDateUtil.formatDate(employmentFromDate!);
         }
         ///Existing to date
-        int toDatePrevious= widget.employeeModal?.dateTo??0;
+        int toDatePrevious= widget.employeeModal?.employmentToDate??0;
+
+        ///Previous to date is available
         if(toDatePrevious!=0) {
-          toDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.dateTo??0);
-          toDateFormatted=AppDateUtil.formatDate(toDate!);
+          employmentToDate=DateTime.fromMillisecondsSinceEpoch(widget.employeeModal?.employmentToDate??0);
+          employmentToDateFormatted=AppDateUtil.formatDate(employmentToDate!);
         }
-        roleSelected=widget.employeeModal?.role??"";
+        employeeRoleSelected=widget.employeeModal?.role??"";
+
+        ///Refresh UI
         setState(() {
 
         });
@@ -121,7 +128,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                   decoration: BoxDecoration(
                       border: Border.all(color: AppColor.textFieldBorderColor)),
                   child: TextFormField(
-                    controller: _controllerName,
+                    controller: _controllerEmployeeName,
                     decoration: InputDecoration(
                       hintText: "Joseph Manadan",
                       icon: Padding(
@@ -209,7 +216,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                    if(role!=null)
                      {
                        setState(() {
-                         roleSelected=role;
+                         employeeRoleSelected=role;
                        });
                      }
                   },
@@ -229,8 +236,8 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                         ),
                          Expanded(
                           child: Text(
-                            roleSelected.isEmpty?
-                            "Select Role":roleSelected,
+                            employeeRoleSelected.isEmpty?
+                            "Select Role":employeeRoleSelected,
                           ),
                         ),
                         Padding(
@@ -250,9 +257,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     Expanded(
                       child: GestureDetector(
                         onTap: ()async{
-                          fromDate=await getDateTime();
-                          if(fromDate!=null) {
-                            fromDateFormatted=AppDateUtil.formatDate(fromDate!);
+                          employmentFromDate=await getDateTime();
+                          if(employmentFromDate!=null) {
+                            employmentFromDateFormatted=AppDateUtil.formatDate(employmentFromDate!);
                             setState(() {
                             });
                           }
@@ -271,7 +278,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                               Text(fromDateFormatted.isEmpty?"Today":fromDateFormatted),
+                               Text(employmentFromDateFormatted.isEmpty?"Today":employmentFromDateFormatted),
                             ],
                           ),
                         ),
@@ -284,9 +291,9 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                     Expanded(
                       child: GestureDetector(
                         onTap: ()async{
-                          toDate=await getDateTime();
-                          if(toDate!=null) {
-                            toDateFormatted=AppDateUtil.formatDate(toDate!);
+                          employmentToDate=await getDateTime();
+                          if(employmentToDate!=null) {
+                            employmentToDateFormatted=AppDateUtil.formatDate(employmentToDate!);
                             setState(() {
 
                             });
@@ -306,7 +313,7 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                              Text(toDateFormatted.isEmpty?"No date":toDateFormatted),
+                              Text(employmentToDateFormatted.isEmpty?"No date":employmentToDateFormatted),
                             ],
                           ),
                         ),
@@ -339,17 +346,17 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
           ),
           ElevatedButton(onPressed: () async{
 
-               if(roleSelected.isEmpty) {
+               if(employeeRoleSelected.isEmpty) {
                  Fluttertoast.showToast(msg: "Please select a role for this employee");
                  return;
                }
-               if(_controllerName.text.isEmpty) {
+               if(_controllerEmployeeName.text.isEmpty) {
                  Fluttertoast.showToast(msg: "Please enter name of the employee");
                  return;
                }
-               if(toDate!=null&&fromDate!=null)
+               if(employmentToDate!=null&&employmentFromDate!=null)
                  {
-                   Duration diff =toDate!.difference(fromDate!);
+                   Duration diff =employmentToDate!.difference(employmentFromDate!);
                    if(diff.isNegative) {
                      Fluttertoast.showToast(msg: "Employee start date can not smaller than end date");
                      return;
@@ -365,21 +372,30 @@ class _AddEmployeeScreenState extends State<AddEmployeeScreen> {
       ),
     );
   }
+  ///Insert or Updates employee
   void saveOrUpdateEmployee()async{
     EmployeeModal employeeModal=EmployeeModal();
 
+    ///Employee update case
     if(widget.employeeModal!=null) {
       employeeModal=widget.employeeModal!;
     }
 
 
-    employeeModal.role=roleSelected;
-    employeeModal.dateFrom=fromDate?.millisecondsSinceEpoch??DateTime.now().millisecondsSinceEpoch;
-    employeeModal.dateTo=toDate?.millisecondsSinceEpoch??0;
-    employeeModal.name=_controllerName.text;
+    employeeModal.role=employeeRoleSelected;
+
+    ///if employment from date is not available just put today
+    employeeModal.employmentFromDate=employmentFromDate?.millisecondsSinceEpoch??DateTime.now().millisecondsSinceEpoch;
+
+    ///If to Date is not available just put 0
+    employeeModal.employmentToDate=employmentToDate?.millisecondsSinceEpoch??0;
+    employeeModal.name=_controllerEmployeeName.text;
+
+    ///Update
     if(widget.employeeModal!=null) {
       await Provider.of<EmployeeProvider>(context, listen: false).updateEmployee(employeeModal);
     }
+    ///Insert
     if(widget.employeeModal==null&&mounted) {
       await Provider.of<EmployeeProvider>(context, listen: false).addEmployee(employeeModal);
     }

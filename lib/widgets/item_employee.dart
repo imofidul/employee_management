@@ -12,7 +12,7 @@ class EmployeeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return  GestureDetector(
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AddEmployeeScreen(employeeModal: employeeModal,)));
+        Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employeeModal,)));
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 16,bottom: 16),
@@ -21,7 +21,7 @@ class EmployeeItem extends StatelessWidget {
           children: [
             Text(employeeModal.name??"",style: GoogleFonts.roboto(color: const Color(0xff323238),fontSize: 16),),
             Text(employeeModal.role??"",style: GoogleFonts.roboto(color: const Color(0xff949C9E),fontSize: 14),),
-            Text(AppDateUtil.formatDateMillisecond(employeeModal.dateFrom??0,employeeModal.dateTo??0,),style: GoogleFonts.roboto(color: const Color(0xff949C9E),fontSize: 14)),
+            Text(AppDateUtil.formatDateFromMillisecond(employeeModal.employmentFromDate??0,employeeModal.employmentToDate??0,),style: GoogleFonts.roboto(color: const Color(0xff949C9E),fontSize: 14)),
           ],
         ),
       ),

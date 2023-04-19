@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+///Display list of employee or a empty screen
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -29,8 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Consumer<EmployeeProvider>(
         builder: (_, employeeProvider, child) {
-          if (employeeProvider.employeeListCurrent.isEmpty &&
-              employeeProvider.employeeListPrevious.isEmpty) {
+          if (employeeProvider.currentEmployees.isEmpty &&
+              employeeProvider.previousEmployees.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -45,10 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return Container(
-            color: const Color(0xfff2f2f2),
+            color: AppColor.backgroundColor,
             child: ListView(
               children: [
-                if (employeeProvider.employeeListCurrent.isNotEmpty)
+                if (employeeProvider.currentEmployees.isNotEmpty)
                   Row(
                     children: [
                       Expanded(
@@ -63,18 +64,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                if (employeeProvider.employeeListCurrent.isNotEmpty)
+                if (employeeProvider.currentEmployees.isNotEmpty)
                   Container(
-                    color: const Color(0xfff5f5f5),
+                    color: AppColor.employeeListBackgroundColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: employeeProvider.employeeListCurrent.length,
+                        itemCount: employeeProvider.currentEmployees.length,
                         itemBuilder: (_, index) {
                           EmployeeModal employee =
-                              employeeProvider.employeeListCurrent[index];
+                              employeeProvider.currentEmployees[index];
                           return Dismissible(
                             direction: DismissDirection.endToStart,
                             key: ObjectKey(employee),
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             onDismissed: (DismissDirection direction) {
                               if (direction == DismissDirection.endToStart) {
-                                employeeProvider.employeeListCurrent
+                                employeeProvider.currentEmployees
                                     .remove(employee);
                                 employeeProvider.removeEmployee(employee);
                               }
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                if (employeeProvider.employeeListPrevious.isNotEmpty)
+                if (employeeProvider.previousEmployees.isNotEmpty)
                   Row(
                     children: [
                       Expanded(
@@ -118,19 +119,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                if (employeeProvider.employeeListPrevious.isNotEmpty)
+                if (employeeProvider.previousEmployees.isNotEmpty)
                   Container(
-                    color: const Color(0xfff5f5f5),
+                    color: AppColor.employeeListBackgroundColor,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount:
-                              employeeProvider.employeeListPrevious.length,
+                              employeeProvider.previousEmployees.length,
                           itemBuilder: (_, index) {
                             EmployeeModal employee =
-                                employeeProvider.employeeListPrevious[index];
+                                employeeProvider.previousEmployees[index];
                             return Dismissible(
                               direction: DismissDirection.endToStart,
                               key: ObjectKey(employee),
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               onDismissed: (DismissDirection direction) {
                                 if (direction == DismissDirection.endToStart) {
-                                  employeeProvider.employeeListPrevious
+                                  employeeProvider.previousEmployees
                                       .remove(employee);
                                   employeeProvider.removeEmployee(employee);
                                 }
@@ -163,7 +164,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Text(
                     "Swipe left to delete",
                     style: GoogleFonts.roboto(
-                        fontSize: 14, color: const Color(0xff949C9E)),
+                      fontSize: 14,
+                      color: const Color(0xff949C9E),
+                    ),
                   ),
                 ),
               ],
@@ -173,16 +176,22 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: GestureDetector(
         onTap: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const AddEmployeeScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const AddOrUpdateEmployeeScreen(),
+            ),
+          );
         },
         child: Container(
           height: AppDimension.fabHeight,
           width: AppDimension.fabWidth,
           decoration: BoxDecoration(
-              color: AppColor.primaryColor,
-              borderRadius: BorderRadius.all(
-                  Radius.circular(AppDimension.fabBorderRadius))),
+            color: AppColor.primaryColor,
+            borderRadius: BorderRadius.all(
+              Radius.circular(AppDimension.fabBorderRadius),
+            ),
+          ),
           child: Icon(
             Icons.add,
             color: AppColor.colorOnPrimary,

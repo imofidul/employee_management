@@ -87,15 +87,15 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:  Text(widget.employeeModal==null?"Add Employee Details":"Edit Employee Details",style: headerTextStyle),
+        title:  Text(widget.employeeModal==null?AppText.textAddEmployee:AppText.textEditEmployee,style: headerTextStyle),
         actions: [
           if(widget.employeeModal!=null)
             GestureDetector(
               onTap: ()async{
                 final snackBar = SnackBar(
-                  content: const Text('Employee record has been deleted'),
+                  content:  Text(AppText.textDeletedEmployee),
                   action: SnackBarAction(
-                    label: 'Undo',
+                    label: AppText.textDeletedUndoEmployee,
                     onPressed: () {
                        Provider.of<EmployeeProvider>(context, listen: false).addEmployee(widget.employeeModal!);
                     },
@@ -133,7 +133,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                     controller: _controllerEmployeeName,
                     style:formValueTextStyleMedium,
                     decoration: InputDecoration(
-                      hintText: "Employee Name",
+                      hintText:AppText.textHintName,
                       hintStyle: unSelectedTextStyleMedium,
                       icon: Padding(
                         padding: const EdgeInsets.only(
@@ -163,11 +163,11 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                               children: <Widget>[
                                 GestureDetector(
                                   onTap:(){
-                                    Navigator.pop(context,"Product Designer");
+                                    Navigator.pop(context,AppText.roleProductDesigner);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 16.0,right: 16,top: 16,bottom: 8),
-                                    child: Text("Product Designer",style: GoogleFonts.roboto(fontSize: 16,color: AppColor.textBottomSheetColor),),
+                                    child: Text(AppText.roleProductDesigner,style: bottomSheetTextStyle,),
                                   ),
                                 ),
                                 Container(
@@ -176,11 +176,11 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.pop(context,"Flutter Developer");
+                                    Navigator.pop(context,AppText.roleFlutterDeveloper);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 16.0,right: 16,top: 16,bottom: 8),
-                                    child: Text("Flutter Developer",style: GoogleFonts.roboto(fontSize: 16,color: AppColor.textBottomSheetColor),),
+                                    child: Text(AppText.roleFlutterDeveloper,style: bottomSheetTextStyle,),
                                   ),
                                 ),
                                 Container(
@@ -189,11 +189,11 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.pop(context,"QA Tester");
+                                    Navigator.pop(context,AppText.roleQA);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 16.0,right: 16,top: 16,bottom: 8),
-                                    child: Text("QA Tester",style: GoogleFonts.roboto(fontSize: 16,color: AppColor.textBottomSheetColor),),
+                                    child: Text(AppText.roleQA,style: bottomSheetTextStyle,),
                                   ),
                                 ),
                                 Container(
@@ -202,11 +202,11 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: (){
-                                    Navigator.pop(context,"Product Owner");
+                                    Navigator.pop(context,AppText.roleProductOwner);
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 16.0,right: 16,top: 16,bottom: 8),
-                                    child: Text("Product Owner",style: GoogleFonts.roboto(fontSize: 16,color: AppColor.textBottomSheetColor),),
+                                    child: Text(AppText.roleProductOwner,style: bottomSheetTextStyle,),
                                   ),
                                 ),
 
@@ -241,7 +241,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                          Expanded(
                           child: Text(
                             employeeRoleSelected.isEmpty?
-                            "Select Role":employeeRoleSelected,
+                            AppText.roleDefaultText:employeeRoleSelected,
                             style: employeeRoleSelected.isEmpty?unSelectedTextStyleMedium:formValueTextStyleMedium,
                           ),
                         ),
@@ -342,7 +342,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
               backgroundColor: const Color(0xffEDF8FF),
             ),
             child: Text(
-              "Cancel",
+              AppText.cancelBtnText,
               style: GoogleFonts.roboto(color: AppColor.primaryColor),
             ),
           ),
@@ -352,18 +352,18 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
           ElevatedButton(onPressed: () async{
 
                if(employeeRoleSelected.isEmpty) {
-                 Fluttertoast.showToast(msg: "Please select a role for this employee");
+                 Fluttertoast.showToast(msg: AppText.selectRoleError);
                  return;
                }
                if(_controllerEmployeeName.text.isEmpty) {
-                 Fluttertoast.showToast(msg: "Please enter name of the employee");
+                 Fluttertoast.showToast(msg: AppText.nameError);
                  return;
                }
                if(employmentToDate!=null&&employmentFromDate!=null)
                  {
                    Duration diff =employmentToDate!.difference(employmentFromDate!);
                    if(diff.isNegative) {
-                     Fluttertoast.showToast(msg: "Employee start date can not smaller than end date");
+                     Fluttertoast.showToast(msg: AppText.dateError);
                      return;
                    }
                  }
@@ -372,7 +372,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                saveOrUpdateEmployee();
 
 
-          }, child: const Text("Save"))
+          }, child:  Text(AppText.confirmButtonText))
         ],
       ),
     );

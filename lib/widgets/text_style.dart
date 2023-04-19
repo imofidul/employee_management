@@ -27,3 +27,4 @@ var unselectedStyleSmall=GoogleFonts.roboto(color: AppColor.unselectedTextColor,
 var formValueStyleSmall=GoogleFonts.roboto(color: AppColor.blackValueColor,
     fontWeight: AppDimension.fontWeight400,
     fontSize: AppDimension.fontSizeSmall);
+var bottomSheetTextStyle=GoogleFonts.roboto(fontSize: 16,color: AppColor.textBottomSheetColor);

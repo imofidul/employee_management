@@ -27,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Employee List",style: headerTextStyle,),
+        title:  Text(AppText.textEmployeeList,style: headerTextStyle,),
       ),
       body: Consumer<EmployeeProvider>(
         builder: (_, employeeProvider, child) {
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "./assets/svg/empty_employee_list.svg",
                   ),
                 ),
-                 Text("No employee records found",style: GoogleFonts.roboto(color: AppColor.emptyScreenTextColor,fontWeight: AppDimension.fontWeight500,fontSize: AppDimension.fontSizeLarge,),),
+                 Text(AppText.textNoEmployeeFound,style: GoogleFonts.roboto(color: AppColor.emptyScreenTextColor,fontWeight: AppDimension.fontWeight500,fontSize: AppDimension.fontSizeLarge,),),
               ],
             );
           }
@@ -57,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            "Current Employees",
+                           AppText.textCurrentEmployee,
                             style: subHeaderTextStyle,
                           ),
                         ),
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
-                            "Previous employees",
+                            AppText.textPreviousEmployee,
                             style: subHeaderTextStyle,
                           ),
                         ),
@@ -161,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.only(top: 12, bottom: 12, left: 16),
                   child: Text(
-                    "Swipe left to delete",
+                    AppText.textSwipeLeftToDelete,
                     style: GoogleFonts.roboto(
                       fontSize: 14,
                       color: const Color(0xff949C9E),

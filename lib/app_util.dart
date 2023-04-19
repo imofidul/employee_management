@@ -58,4 +58,27 @@ class AppDateUtil{
 
 }
 
+class AppText{
+  static String textEmployeeList="Employee List";
+  static String textNoEmployeeFound="No employee records found";
+  static String textCurrentEmployee= "Current Employees";
+  static String textPreviousEmployee="Previous employees";
+  static String textSwipeLeftToDelete="Swipe left to delete";
+  static String textAddEmployee="Add Employee Details";
+  static String textEditEmployee="Edit Employee Details";
+  static String textDeletedEmployee='Employee record has been deleted';
+  static String textDeletedUndoEmployee='Undo';
+  static String textHintName= "Employee Name";
+  static String roleDefaultText="Select Role";
+  static String selectRoleError="Please select a role for this employee";
+  static String nameError="Please enter name of the employee";
+  static String dateError="Employee start date can not smaller than end date";
+  static String cancelBtnText="Cancel";
+  static String confirmButtonText="Save";
+  static String roleProductDesigner="Product Designer";
+  static String roleFlutterDeveloper="Flutter Developer";
+  static String roleQA="QA Tester";
+  static String roleProductOwner="Product Owner";
 
+
+}

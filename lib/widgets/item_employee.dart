@@ -3,7 +3,6 @@ import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:employee_management/views/add_employee_screen.dart';
 import 'package:employee_management/widgets/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class EmployeeItem extends StatelessWidget {
   final EmployeeModal employeeModal;

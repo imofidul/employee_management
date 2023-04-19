@@ -67,47 +67,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (employeeProvider.currentEmployees.isNotEmpty)
                   Container(
                     color: AppColor.employeeListBackgroundColor,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: employeeProvider.currentEmployees.length,
-                        itemBuilder: (_, index) {
-                          EmployeeModal employee =
-                              employeeProvider.currentEmployees[index];
-                          return GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
+                    child: ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: employeeProvider.currentEmployees.length,
+                      itemBuilder: (_, index) {
+                        EmployeeModal employee =
+                            employeeProvider.currentEmployees[index];
+                        return GestureDetector(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
 
-                            },
-                            child: Dismissible(
-                              direction: DismissDirection.endToStart,
-                              key: ObjectKey(employee),
-                              background: Container(
-                                color: Colors.red,
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onDismissed: (DismissDirection direction) {
-                                if (direction == DismissDirection.endToStart) {
-                                  employeeProvider.currentEmployees
-                                      .remove(employee);
-                                  employeeProvider.removeEmployee(employee);
-                                }
-                              },
-                              child: EmployeeItem(
-                                employeeModal: employee,
+                          },
+                          child: Dismissible(
+                            direction: DismissDirection.endToStart,
+                            key: ObjectKey(employee),
+                            background: Container(
+                              color: Colors.red,
+                              child: const Icon(
+                                Icons.delete,
+                                color: Colors.white,
                               ),
                             ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Divider(height: 1);
-                        },
-                      ),
+                            onDismissed: (DismissDirection direction) {
+                              if (direction == DismissDirection.endToStart) {
+                                employeeProvider.currentEmployees
+                                    .remove(employee);
+                                employeeProvider.removeEmployee(employee);
+                              }
+                            },
+                            child: EmployeeItem(
+                              employeeModal: employee,
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(height: 1);
+                      },
                     ),
                   ),
                 if (employeeProvider.previousEmployees.isNotEmpty)
@@ -127,47 +124,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (employeeProvider.previousEmployees.isNotEmpty)
                   Container(
                     color: AppColor.employeeListBackgroundColor,
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: ListView.separated(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount:
-                              employeeProvider.previousEmployees.length,
-                          itemBuilder: (_, index) {
-                            EmployeeModal employee =
-                                employeeProvider.previousEmployees[index];
-                            return GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
-                              },
-                              child: Dismissible(
-                                direction: DismissDirection.endToStart,
-                                key: ObjectKey(employee),
-                                background: Container(
-                                  color: Colors.red,
-                                  child: const Icon(
-                                    Icons.delete,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                onDismissed: (DismissDirection direction) {
-                                  if (direction == DismissDirection.endToStart) {
-                                    employeeProvider.previousEmployees
-                                        .remove(employee);
-                                    employeeProvider.removeEmployee(employee);
-                                  }
-                                },
-                                child: EmployeeItem(
-                                  employeeModal: employee,
+                    child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount:
+                            employeeProvider.previousEmployees.length,
+                        itemBuilder: (_, index) {
+                          EmployeeModal employee =
+                              employeeProvider.previousEmployees[index];
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
+                            },
+                            child: Dismissible(
+                              direction: DismissDirection.endToStart,
+                              key: ObjectKey(employee),
+                              background: Container(
+                                color: Colors.red,
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
                                 ),
                               ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) {
-                            return const Divider(height: 1);
-                          }),
-                    ),
+                              onDismissed: (DismissDirection direction) {
+                                if (direction == DismissDirection.endToStart) {
+                                  employeeProvider.previousEmployees
+                                      .remove(employee);
+                                  employeeProvider.removeEmployee(employee);
+                                }
+                              },
+                              child: EmployeeItem(
+                                employeeModal: employee,
+                              ),
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(height: 1);
+                        }),
                   ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12, bottom: 12, left: 16),

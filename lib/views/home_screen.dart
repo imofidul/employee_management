@@ -83,10 +83,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             direction: DismissDirection.endToStart,
                             key: ObjectKey(employee),
                             background: Container(
-                              color: Colors.red,
-                              child: const Icon(
-                                Icons.delete,
-                                color: Colors.white,
+                              color: AppColor.deleteBackground,
+                              child:Center(
+                                child: SvgPicture.asset(
+                                    "./assets/svg/delete_icon.svg",height: 18,width: 18,),
                               ),
                             ),
                             onDismissed: (DismissDirection direction) {
@@ -140,10 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               direction: DismissDirection.endToStart,
                               key: ObjectKey(employee),
                               background: Container(
-                                color: Colors.red,
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
+                                color: AppColor.deleteBackground,
+                                child: Center(
+                                  child: SvgPicture.asset(
+                                      "./assets/svg/delete_icon.svg",height: 18,),
                                 ),
                               ),
                               onDismissed: (DismissDirection direction) {

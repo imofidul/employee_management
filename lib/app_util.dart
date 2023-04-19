@@ -12,6 +12,7 @@ class AppColor{
   static Color emptyScreenTextColor=const Color(0xff323238);
   static Color unselectedTextColor=const Color(0xff949C9E);
   static Color blackValueColor=const Color(0xff323238);
+  static Color deleteBackground=const Color(0xffF34642);
 
 
 

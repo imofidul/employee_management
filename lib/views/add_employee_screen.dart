@@ -2,6 +2,7 @@ import 'package:employee_management/app_util.dart';
 import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
 import 'package:employee_management/widgets/app_custom_date_picker.dart';
+import 'package:employee_management/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -85,7 +86,8 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(widget.employeeModal==null?"Add Employee Details":"Edit Employee Details"),
+        automaticallyImplyLeading: false,
+        title:  Text(widget.employeeModal==null?"Add Employee Details":"Edit Employee Details",style: headerTextStyle),
         actions: [
           if(widget.employeeModal!=null)
             GestureDetector(
@@ -129,8 +131,10 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                       border: Border.all(color: AppColor.textFieldBorderColor)),
                   child: TextFormField(
                     controller: _controllerEmployeeName,
+                    style:formValueTextStyleMedium,
                     decoration: InputDecoration(
-                      hintText: "Joseph Manadan",
+                      hintText: "Employee Name",
+                      hintStyle: unSelectedTextStyleMedium,
                       icon: Padding(
                         padding: const EdgeInsets.only(
                             top: 12.69, bottom: 12.69, left: 12.69),
@@ -238,6 +242,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                           child: Text(
                             employeeRoleSelected.isEmpty?
                             "Select Role":employeeRoleSelected,
+                            style: employeeRoleSelected.isEmpty?unSelectedTextStyleMedium:formValueTextStyleMedium,
                           ),
                         ),
                         Padding(
@@ -278,7 +283,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                               Text(employmentFromDateFormatted.isEmpty?"Today":employmentFromDateFormatted),
+                               Text(employmentFromDateFormatted.isEmpty?"Today":employmentFromDateFormatted,style:formValueStyleSmall),
                             ],
                           ),
                         ),
@@ -313,7 +318,7 @@ class _AddOrUpdateEmployeeScreenState extends State<AddOrUpdateEmployeeScreen> {
                                 child: SvgPicture.asset(
                                     "./assets/svg/calender_icon.svg"),
                               ),
-                              Text(employmentToDateFormatted.isEmpty?"No date":employmentToDateFormatted),
+                              Text(employmentToDateFormatted.isEmpty?"No date":employmentToDateFormatted,style: employmentToDateFormatted.isEmpty?unselectedStyleSmall:formValueStyleSmall,),
                             ],
                           ),
                         ),

@@ -3,6 +3,7 @@ import 'package:employee_management/data/model/employee_modal.dart';
 import 'package:employee_management/view_model/employee_provider.dart';
 import 'package:employee_management/views/add_employee_screen.dart';
 import 'package:employee_management/widgets/item_employee.dart';
+import 'package:employee_management/widgets/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Employee List"),
+        title:  Text("Employee List",style: headerTextStyle,),
       ),
       body: Consumer<EmployeeProvider>(
         builder: (_, employeeProvider, child) {
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "./assets/svg/empty_employee_list.svg",
                   ),
                 ),
-                const Text("No employee records found"),
+                 Text("No employee records found",style: GoogleFonts.roboto(color: AppColor.emptyScreenTextColor,fontWeight: AppDimension.fontWeight500,fontSize: AppDimension.fontSizeLarge,),),
               ],
             );
           }

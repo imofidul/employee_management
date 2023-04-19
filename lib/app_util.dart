@@ -9,6 +9,11 @@ class AppColor{
   static Color textBottomSheetColor=const Color(0xff323238);
   static Color backgroundColor=const Color(0xfff2f2f2);
   static Color employeeListBackgroundColor=const Color(0xfff5f5f5);
+  static Color emptyScreenTextColor=const Color(0xff323238);
+  static Color unselectedTextColor=const Color(0xff949C9E);
+  static Color formValueColor=const Color(0xff323238);
+
+
 
 
 }
@@ -16,8 +21,15 @@ class AppDimension{
   static double fabHeight=50;
   static double fabWidth=50;
   static double fabBorderRadius=8;
-
+  ///fonts
+  static double fontSizeLarge=18;
+  static double fontSizeMedium=16;
+  static double fontSizeSmall=14;
+  static double fabIconHeight=18;
+  static FontWeight fontWeight400=FontWeight.w400;
+  static FontWeight fontWeight500=FontWeight.w500;
 }
+
 
 
 class AppDateUtil{

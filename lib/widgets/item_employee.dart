@@ -10,20 +10,15 @@ class EmployeeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employeeModal,)));
-      },
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16,bottom: 16),
-        child: Column(
-         crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(employeeModal.name??"",style: h1TextStyle,),
-            Text(employeeModal.role??"",style: h2TextStyle,),
-            Text(AppDateUtil.formatDateFromMillisecond(employeeModal.employmentFromDate??0,employeeModal.employmentToDate??0,),style: h2TextStyle),
-          ],
-        ),
+    return  Padding(
+      padding: const EdgeInsets.only(top: 16,bottom: 16),
+      child: Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(employeeModal.name??"",style: h1TextStyle,),
+          Text(employeeModal.role??"",style: h2TextStyle,),
+          Text(AppDateUtil.formatDateFromMillisecond(employeeModal.employmentFromDate??0,employeeModal.employmentToDate??0,),style: h2TextStyle),
+        ],
       ),
     );
   }

@@ -76,25 +76,31 @@ class _HomeScreenState extends State<HomeScreen> {
                         itemBuilder: (_, index) {
                           EmployeeModal employee =
                               employeeProvider.currentEmployees[index];
-                          return Dismissible(
-                            direction: DismissDirection.endToStart,
-                            key: ObjectKey(employee),
-                            background: Container(
-                              color: Colors.red,
-                              child: const Icon(
-                                Icons.delete,
-                                color: Colors.white,
-                              ),
-                            ),
-                            onDismissed: (DismissDirection direction) {
-                              if (direction == DismissDirection.endToStart) {
-                                employeeProvider.currentEmployees
-                                    .remove(employee);
-                                employeeProvider.removeEmployee(employee);
-                              }
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
+
                             },
-                            child: EmployeeItem(
-                              employeeModal: employee,
+                            child: Dismissible(
+                              direction: DismissDirection.endToStart,
+                              key: ObjectKey(employee),
+                              background: Container(
+                                color: Colors.red,
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              onDismissed: (DismissDirection direction) {
+                                if (direction == DismissDirection.endToStart) {
+                                  employeeProvider.currentEmployees
+                                      .remove(employee);
+                                  employeeProvider.removeEmployee(employee);
+                                }
+                              },
+                              child: EmployeeItem(
+                                employeeModal: employee,
+                              ),
                             ),
                           );
                         },
@@ -131,25 +137,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (_, index) {
                             EmployeeModal employee =
                                 employeeProvider.previousEmployees[index];
-                            return Dismissible(
-                              direction: DismissDirection.endToStart,
-                              key: ObjectKey(employee),
-                              background: Container(
-                                color: Colors.red,
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              onDismissed: (DismissDirection direction) {
-                                if (direction == DismissDirection.endToStart) {
-                                  employeeProvider.previousEmployees
-                                      .remove(employee);
-                                  employeeProvider.removeEmployee(employee);
-                                }
+                            return GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (_)=> AddOrUpdateEmployeeScreen(employeeModal: employee,)));
                               },
-                              child: EmployeeItem(
-                                employeeModal: employee,
+                              child: Dismissible(
+                                direction: DismissDirection.endToStart,
+                                key: ObjectKey(employee),
+                                background: Container(
+                                  color: Colors.red,
+                                  child: const Icon(
+                                    Icons.delete,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                onDismissed: (DismissDirection direction) {
+                                  if (direction == DismissDirection.endToStart) {
+                                    employeeProvider.previousEmployees
+                                        .remove(employee);
+                                    employeeProvider.removeEmployee(employee);
+                                  }
+                                },
+                                child: EmployeeItem(
+                                  employeeModal: employee,
+                                ),
                               ),
                             );
                           },
